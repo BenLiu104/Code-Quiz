@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code quiz</title>
+    <!-- <link rel="stylesheet" href="./assets/css/reset.css"> -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <header>
+        <div>
+            <button>View High Score</button>
+            <h4 class="gameTime"> <span id="timer"></span> seconds remaing</h4>
+        </div>
+    </header>
+
+    <main>
+        <div class="welcome-box">
+            <h1>Coding Quiz Challenge</h1>
+            <p>Try to answer the following code-related questions with the time limit. Keep in mind that incorrect answers will penalize your score time by ten seconds. </p>
+            <button id="startBtn">Start Quiz</button>
+        </div>
+        <div class="question-box">
+            <p class="question">question</p>
+            <ol>
+                <li class="answer answerA" data-ans=0>ans A</li>
+                <li class="answer answerB" data-ans=1>ans B</li>
+                <li class="answer answerC" data-ans=2>ans C</li>
+                <li class="answer answerD" data-ans=3>ans D</li>
+            </ol>
+        </div>
+
+        <div class="result-box">
+            <h3>All Done</h3>
+            <p>your final score is : <span id="score"></span></p>
+            <form action="">
+                <label for="">Enter initial</label>
+                <input type="text">
+                <button id="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="Highscores-box">
+            <h3>Highscores</h3>
+            <button id="backBtn">Go Back</button>
+            <button id="platAgain">Play Again</button>
+            <button id="clearBtn">Clear Highscores</button>
+
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
