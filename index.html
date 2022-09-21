@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code quiz</title>
-    <!-- <link rel="stylesheet" href="./assets/css/reset.css"> -->
+    <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
     <header>
         <div>
-            <button id="viewHighScore">View High Score</button>
+            <button class="button" id="viewHighScore">View High Score</button>
             <h4 class="gameTime"> <span id="timer"></span> seconds remaing</h4>
         </div>
     </header>
@@ -21,10 +21,13 @@
     <main>
         <div class="welcome-box">
             <h1>Coding Quiz Challenge</h1>
-            <p>Try to answer the following code-related questions with the time limit. Keep in mind that incorrect answers will penalize your score time by ten seconds. </p>
-            <button id="startBtn">Start Quiz</button>
+            <p>Try to answer the following code-related questions with the time limit. Keep in mind that incorrect
+                answers will penalize your score time by ten seconds. </p>
+            <br><br>
+            <button class="button" id="startBtn">Start Quiz</button>
         </div>
         <div class="question-box">
+            <p>Current Score: <span id="currentScore"></span></p>
             <p id="question">question</p>
             <ol id="all-answer">
                 <li class="answer" data-ans=0>ans A</li>
@@ -35,23 +38,24 @@
         </div>
 
         <div class="result-box">
-            <h3>All Done</h3>
+            <h3>Congratulations! All Done</h3>
             <p>your final score is : <span id="score"></span></p>
             <form action="">
                 <label for="">Enter initial</label>
                 <input type="text" id="initial" required>
-                <button id="submit">Submit</button>
+                <button class="button" id="submit">Submit</button>
             </form>
         </div>
 
         <div class="Highscores-box">
             <h3>Highscores</h3>
             <ul class="highScore-list">
-    
+
             </ul>
-            <button id="backBtn">Go Back</button>
-            <!-- <button id="playAgain">Play Again</button> -->
-            <button id="clearBtn">Clear Highscores</button>
+            <div>
+                <button class="button" id="backBtn">Go Back</button>
+                <button class="button" id="clearBtn">Clear Highscores</button>
+            </div>
 
         </div>
     </main>

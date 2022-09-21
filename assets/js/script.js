@@ -1,15 +1,15 @@
 
-({
-    jsdom: { "file": "index.html" }
-})
+// ({
+//     jsdom: { "file": "index.html" }
+// })
 
 const questionSet = [
+    { question: "What is computer coding?", correctAnswer: "Telling a computer what to do", answers: ["A List of functions", "Telling a computer what to do", "A TV show", "A Radio show"] },
     { question: "In JavaScript, what is used in conjunction with HTML to “react” to certain elements?", correctAnswer: "Event", answers: ["Event", "Condition", "Boolean", "RegExp"] },
     { question: "To be defined, strings must be enclosed by what?", correctAnswer: "Quotes", answers: ["Brackets", "Quotes", "Curly Brackets", "Integers"] },
     { question: "In JavaScript, what element is used to store multiple values in a single variable?", correctAnswer: "Arrays", answers: ["Strings", "Arrays", "Functions", "Veriables"] },
     { question: "what is the maximum number of Math.floor(Math.random()*5)?", correctAnswer: "4", answers: ["2", "3", "4", "5"] },
     { question: "What are people who write computer code called", correctAnswer: "Programmers", answers: ["manufacturers", "cryptographers", "Programmers", "Professors"] },
-    { question: "What is computer coding?", correctAnswer: "Telling a computer what to do", answers: ["A List of functions", "Telling a computer what to do", "A TV show", "A Radio show"] },
     { question: "Which of these NOT run using a computer program?", correctAnswer: "Bicycle", answers: ["Bicycle", "Car", "Rocket", "Train"] },
     { question: "What are the identifiers called that cannot be used as variables or function names?", correctAnswer: "Reserved Words", answers: ["Favourites", "Concrete Terms", "Constants", "Reserved Words"] },
     { question: "What is the name of the object that allows you to perform mathematical tasks with the interpreter?", correctAnswer: "Math", answers: ["Count", "Math", "Number", "Solve"] },
@@ -22,6 +22,7 @@ let resultBox = document.querySelector(".result-box");
 let scoreBox = document.querySelector(".Highscores-box");
 let timebar = document.querySelector(".gameTime");
 let timerElement = document.getElementById("timer");
+let currentScore = document.getElementById("currentScore");
 let questioinEl = document.getElementById("question");
 let allAnswerEl = document.getElementById("all-answer");
 let answersEl = document.querySelectorAll(".answer");
@@ -33,7 +34,7 @@ let playAgain = document.getElementById("playAgain");
 let clearBtn = document.getElementById("clearBtn");
 let viewHighScoreBtn = document.getElementById("viewHighScore");
 var isDone = true;
-var timer;  //variable for timer function
+var timer; 
 var timerCount;
 let score = 0;
 let qusetionNum = 0;
@@ -41,7 +42,7 @@ let letters = /^[A-Za-z]+$/;
 
 // The init function is called when the page loads ,just display welcome message
 function init() {
-    welcomePage.setAttribute("style", "display:block");
+    welcomePage.setAttribute("style", "display:flex");
     questionBox.setAttribute("style", "display:none");
     resultBox.setAttribute("style", "display:none");
     scoreBox.setAttribute("style", "display:none");
@@ -56,12 +57,13 @@ startBtn.addEventListener("click", startGame);
 // The startGame function is called when the start button is clicked
 function startGame() {
     welcomePage.setAttribute("style", "display:none");
-    questionBox.setAttribute("style", "display:block");
+    questionBox.setAttribute("style", "display:flex");
     timebar.setAttribute("style", "display:block");
     isDone = false;
     timerCount = 90;
     score = 0;
     qusetionNum = 0;
+    currentScore.textContent = score;
     timerElement.textContent = timerCount;
     renderQuestion();
     startTimer();
@@ -106,9 +108,12 @@ function renderQuestion() {
 
 //event handler to check correctness of answer and render next question
 allAnswerEl.addEventListener("click", function (event) {
-    checkCorrect(event);
-    qusetionNum++;
-    renderQuestion();
+    if (event.target.matches(".answer")) {
+        checkCorrect(event);
+        qusetionNum++;
+        renderQuestion();
+    }
+
 })
 
 // function to check anser correctness and count the score accordingly
@@ -116,12 +121,13 @@ function checkCorrect(event) {
     let userAnswer = event.target.dataset.ans;
     if (questionSet[qusetionNum].answers[userAnswer] == questionSet[qusetionNum].correctAnswer) {
         score = score + 10;
-        console.log("score:" + score);
+        currentScore.textContent = score;
+        // console.log("score:" + score);
         return true;
     } else {
-        score = score - 10;
+        // score = score - 10;
         timerCount = timerCount - 10;
-        console.log("score:" + score);
+        // console.log("score:" + score);
         return false;
     }
 }
@@ -131,7 +137,7 @@ function endGame() {
     //dispaly result screen only
     welcomePage.setAttribute("style", "display:none");
     questionBox.setAttribute("style", "display:none");
-    resultBox.setAttribute("style", "display:block");
+    resultBox.setAttribute("style", "display:flex");
     scoreBox.setAttribute("style", "display:none");
     timebar.setAttribute("style", "display:none");
     viewHighScoreBtn.setAttribute("style", "display:none");
@@ -150,7 +156,7 @@ submitBtn.addEventListener("click", function (event) {
         highScoreRecord.push({ "Name": userName, "Score": score });
         saveScoreRecord(userName);
         resultBox.setAttribute("style", "display:none");
-        scoreBox.setAttribute("style", "display:block");
+        scoreBox.setAttribute("style", "display:flex");
         viewHighScoreBtn.setAttribute("style", "display:none");
         renderScore();
     }
@@ -182,7 +188,7 @@ viewHighScoreBtn.addEventListener("click", function () {
     welcomePage.setAttribute("style", "display:none");
     questionBox.setAttribute("style", "display:none");
     resultBox.setAttribute("style", "display:none");
-    scoreBox.setAttribute("style", "display:block");
+    scoreBox.setAttribute("style", "display:flex");
     timebar.setAttribute("style", "display:none");
     viewHighScoreBtn.setAttribute("style", "display:none");
     renderScore();
@@ -192,7 +198,7 @@ viewHighScoreBtn.addEventListener("click", function () {
 backBtn.addEventListener("click", function () {
     //if still answering question, will back to question
     if (isDone) {
-        welcomePage.setAttribute("style", "display:block");
+        welcomePage.setAttribute("style", "display:flex");
         questionBox.setAttribute("style", "display:none");
         resultBox.setAttribute("style", "display:none");
         scoreBox.setAttribute("style", "display:none");
@@ -202,7 +208,7 @@ backBtn.addEventListener("click", function () {
     //if finish all questions, will back to welcome page screen
     else {
         welcomePage.setAttribute("style", "display:none");
-        questionBox.setAttribute("style", "display:block");
+        questionBox.setAttribute("style", "display:flex");
         resultBox.setAttribute("style", "display:none");
         scoreBox.setAttribute("style", "display:none");
         timebar.setAttribute("style", "display:block");
