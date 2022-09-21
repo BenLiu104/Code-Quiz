@@ -13,7 +13,7 @@
 <body>
     <header>
         <div>
-            <button>View High Score</button>
+            <button id="viewHighScore">View High Score</button>
             <h4 class="gameTime"> <span id="timer"></span> seconds remaing</h4>
         </div>
     </header>
@@ -25,12 +25,12 @@
             <button id="startBtn">Start Quiz</button>
         </div>
         <div class="question-box">
-            <p class="question">question</p>
-            <ol>
-                <li class="answer answerA" data-ans=0>ans A</li>
-                <li class="answer answerB" data-ans=1>ans B</li>
-                <li class="answer answerC" data-ans=2>ans C</li>
-                <li class="answer answerD" data-ans=3>ans D</li>
+            <p id="question">question</p>
+            <ol id="all-answer">
+                <li class="answer" data-ans=0>ans A</li>
+                <li class="answer" data-ans=1>ans B</li>
+                <li class="answer" data-ans=2>ans C</li>
+                <li class="answer" data-ans=3>ans D</li>
             </ol>
         </div>
 
@@ -39,15 +39,18 @@
             <p>your final score is : <span id="score"></span></p>
             <form action="">
                 <label for="">Enter initial</label>
-                <input type="text">
+                <input type="text" id="initial" required>
                 <button id="submit">Submit</button>
             </form>
         </div>
 
         <div class="Highscores-box">
             <h3>Highscores</h3>
+            <ul class="highScore-list">
+    
+            </ul>
             <button id="backBtn">Go Back</button>
-            <button id="platAgain">Play Again</button>
+            <!-- <button id="playAgain">Play Again</button> -->
             <button id="clearBtn">Clear Highscores</button>
 
         </div>
