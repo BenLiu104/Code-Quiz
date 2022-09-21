@@ -46,16 +46,18 @@ h1 {
 ol {
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
 ol li {
-    width: 50%;
     border-radius: 3px;
+    margin-left: 20px;
 }
 
 .answer {
-    margin: 10px 10px 10px 30px;
+    margin: 10px 10px 10px 20px;
 }
+
 
 .answer:hover {
     background-color: lightblue;
@@ -74,4 +76,13 @@ ol li {
 ul li {
     list-style: none;
     margin: 10px;
+}
+
+
+@media only screen and (max-width: 500px) {
+
+    .answer:hover {
+        background: none;
+    }
+
 }

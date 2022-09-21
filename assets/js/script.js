@@ -8,7 +8,7 @@ const questionSet = [
     { question: "In JavaScript, what is used in conjunction with HTML to “react” to certain elements?", correctAnswer: "Event", answers: ["Event", "Condition", "Boolean", "RegExp"] },
     { question: "To be defined, strings must be enclosed by what?", correctAnswer: "Quotes", answers: ["Brackets", "Quotes", "Curly Brackets", "Integers"] },
     { question: "In JavaScript, what element is used to store multiple values in a single variable?", correctAnswer: "Arrays", answers: ["Strings", "Arrays", "Functions", "Veriables"] },
-    { question: "what is the maximum number of Math.floor(Math.random()*5)?", correctAnswer: "4", answers: ["2", "3", "4", "5"] },
+    { question: "what is the maximum number of Math.floor(Math.random()*5)?", correctAnswer: "5", answers: ["2", "3", "4", "5"] },
     { question: "What are people who write computer code called", correctAnswer: "Programmers", answers: ["manufacturers", "cryptographers", "Programmers", "Professors"] },
     { question: "Which of these NOT run using a computer program?", correctAnswer: "Bicycle", answers: ["Bicycle", "Car", "Rocket", "Train"] },
     { question: "What are the identifiers called that cannot be used as variables or function names?", correctAnswer: "Reserved Words", answers: ["Favourites", "Concrete Terms", "Constants", "Reserved Words"] },
@@ -34,7 +34,7 @@ let playAgain = document.getElementById("playAgain");
 let clearBtn = document.getElementById("clearBtn");
 let viewHighScoreBtn = document.getElementById("viewHighScore");
 var isDone = true;
-var timer; 
+var timer;
 var timerCount;
 let score = 0;
 let qusetionNum = 0;
@@ -84,7 +84,7 @@ function startTimer() {
             }
         }
         // Tests if time has run out
-        if (timerCount === 0) {
+        if (timerCount <= 0) {
             // Clears interval
             clearInterval(timer);
             endGame();
@@ -122,12 +122,12 @@ function checkCorrect(event) {
     if (questionSet[qusetionNum].answers[userAnswer] == questionSet[qusetionNum].correctAnswer) {
         score = score + 10;
         currentScore.textContent = score;
-        // console.log("score:" + score);
+
         return true;
     } else {
-        // score = score - 10;
+
         timerCount = timerCount - 10;
-        // console.log("score:" + score);
+
         return false;
     }
 }
@@ -147,11 +147,11 @@ function endGame() {
 
 //collect user initial and display the Highscore record
 submitBtn.addEventListener("click", function (event) {
-    console.log(event);
-    console.log(document.getElementById("initial").value);
+
+
     event.preventDefault();
     let userName = document.getElementById("initial").value;
-    console.log(userName);
+
     if (userName.match(letters)) {
         highScoreRecord.push({ "Name": userName, "Score": score });
         saveScoreRecord(userName);
@@ -173,7 +173,6 @@ function renderScore() {
     if (highScoreRecord == null) {
         highScoreRecord = []
     }
-    console.log(highScoreRecord);
 
     for (let i = 0; i < highScoreRecord.length; i++) {
         let liEl = document.createElement("li");
