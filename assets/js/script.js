@@ -1,21 +1,17 @@
-
-// ({
-//     jsdom: { "file": "index.html" }
-// })
-
+//delcare all required variables
 const questionSet = [
     { question: "What is computer coding?", correctAnswer: "Telling a computer what to do", answers: ["A List of functions", "Telling a computer what to do", "A TV show", "A Radio show"] },
     { question: "In JavaScript, what is used in conjunction with HTML to “react” to certain elements?", correctAnswer: "Event", answers: ["Event", "Condition", "Boolean", "RegExp"] },
     { question: "To be defined, strings must be enclosed by what?", correctAnswer: "Quotes", answers: ["Brackets", "Quotes", "Curly Brackets", "Integers"] },
     { question: "In JavaScript, what element is used to store multiple values in a single variable?", correctAnswer: "Arrays", answers: ["Strings", "Arrays", "Functions", "Veriables"] },
-    { question: "what is the maximum number of Math.floor(Math.random()*5)?", correctAnswer: "5", answers: ["2", "3", "4", "5"] },
-    { question: "What are people who write computer code called", correctAnswer: "Programmers", answers: ["manufacturers", "cryptographers", "Programmers", "Professors"] },
+    { question: "What is the maximum number of Math.floor(Math.random()*5)?", correctAnswer: "5", answers: ["2", "3", "4", "5"] },
+    { question: "What are people who write computer code called", correctAnswer: "Programmers", answers: ["Manufacturers", "Cryptographers", "Programmers", "Professors"] },
     { question: "Which of these NOT run using a computer program?", correctAnswer: "Bicycle", answers: ["Bicycle", "Car", "Rocket", "Train"] },
     { question: "What are the identifiers called that cannot be used as variables or function names?", correctAnswer: "Reserved Words", answers: ["Favourites", "Concrete Terms", "Constants", "Reserved Words"] },
     { question: "What is the name of the object that allows you to perform mathematical tasks with the interpreter?", correctAnswer: "Math", answers: ["Count", "Math", "Number", "Solve"] },
     { question: "What is the element called that is used to describe the set of variables, objects, and functions you explicitly have access to?", correctAnswer: "Scope", answers: ["Scope", "Range", "Restriction", "Limit"] },
 ];
-let highScoreRecord = [];
+
 let welcomePage = document.querySelector(".welcome-box");
 let questionBox = document.querySelector(".question-box");
 let resultBox = document.querySelector(".result-box");
@@ -33,6 +29,7 @@ let backBtn = document.getElementById("backBtn");
 let playAgain = document.getElementById("playAgain");
 let clearBtn = document.getElementById("clearBtn");
 let viewHighScoreBtn = document.getElementById("viewHighScore");
+let highScoreRecord = [];
 var isDone = true;
 var timer;
 var timerCount;
@@ -49,6 +46,7 @@ function init() {
     timebar.setAttribute("style", "display:none");
 }
 
+//call init function to show welcome page
 init();
 
 // Attach event listener to start button to call startGame function on click
@@ -69,7 +67,7 @@ function startGame() {
     startTimer();
 }
 
-// The setTimer function starts and stops the timer and triggers winGame() and loseGame()
+// The setTimer function starts the timer and stop the timmer when end game.
 function startTimer() {
     // Sets timer
     timer = setInterval(function () {
@@ -85,7 +83,7 @@ function startTimer() {
         }
         // Tests if time has run out
         if (timerCount <= 0) {
-            // Clears interval
+            // Clears interval and stops timer
             clearInterval(timer);
             endGame();
         }
@@ -103,17 +101,15 @@ function renderQuestion() {
     if (qusetionNum == questionSet.length) {
         endGame();
     }
-
 }
 
-//event handler to check correctness of answer and render next question
+//Event handler to check correctness of answer and render next question
 allAnswerEl.addEventListener("click", function (event) {
     if (event.target.matches(".answer")) {
         checkCorrect(event);
         qusetionNum++;
         renderQuestion();
     }
-
 })
 
 // function to check anser correctness and count the score accordingly
@@ -122,12 +118,9 @@ function checkCorrect(event) {
     if (questionSet[qusetionNum].answers[userAnswer] == questionSet[qusetionNum].correctAnswer) {
         score = score + 10;
         currentScore.textContent = score;
-
         return true;
     } else {
-
         timerCount = timerCount - 10;
-
         return false;
     }
 }
@@ -148,10 +141,9 @@ function endGame() {
 //collect user initial and display the Highscore record
 submitBtn.addEventListener("click", function (event) {
 
-
     event.preventDefault();
     let userName = document.getElementById("initial").value;
-
+    //respond only when user enter valid user inital
     if (userName.match(letters)) {
         highScoreRecord.push({ "Name": userName, "Score": score });
         saveScoreRecord(userName);
@@ -163,26 +155,27 @@ submitBtn.addEventListener("click", function (event) {
 
 })
 
-//function to render Highscore record on screen
+//Function to render Highscore record on screen
 function renderScore() {
     readScoreRecord();
     let scoreListEl = document.querySelector(".highScore-list");
+    //clear previous <li> from HTML
     while (scoreListEl.firstChild) {
         scoreListEl.removeChild(scoreListEl.firstChild);
     }
+    //initialize scoreRecord array if it is not exist
     if (highScoreRecord == null) {
         highScoreRecord = []
     }
-
+    //show score record on screen
     for (let i = 0; i < highScoreRecord.length; i++) {
         let liEl = document.createElement("li");
         liEl.textContent = highScoreRecord[i].Name + " : " + highScoreRecord[i].Score;
         scoreListEl.appendChild(liEl);
     }
-
-
 }
-//when click the "view high score" button, will show score record
+
+//When click the "view high score" button, will show score record
 viewHighScoreBtn.addEventListener("click", function () {
     welcomePage.setAttribute("style", "display:none");
     questionBox.setAttribute("style", "display:none");
@@ -193,9 +186,9 @@ viewHighScoreBtn.addEventListener("click", function () {
     renderScore();
 })
 
-//event handler for back button
+//Event handler for back button
 backBtn.addEventListener("click", function () {
-    //if still answering question, will back to question
+    //if still answering question, will back to question section
     if (isDone) {
         welcomePage.setAttribute("style", "display:flex");
         questionBox.setAttribute("style", "display:none");
@@ -215,7 +208,7 @@ backBtn.addEventListener("click", function () {
     }
 })
 
-//when click "clear" button, will clear all score history
+//When click "clear" button, will clear all score history
 clearBtn.addEventListener("click", function () {
     highScoreRecord = [];
     localStorage.setItem("highScore", JSON.stringify(highScoreRecord));
@@ -223,7 +216,7 @@ clearBtn.addEventListener("click", function () {
     renderScore();
 })
 
-//function to read score record from local storage
+//Function to read score record from local storage
 function readScoreRecord() {
     highScoreRecord = JSON.parse(localStorage.getItem("highScore"));
     if (highScoreRecord == null) {
@@ -231,7 +224,7 @@ function readScoreRecord() {
     }
 }
 
-//function to write score to local storage
+//Function to write score to local storage
 function saveScoreRecord(userName) {
     readScoreRecord();
     highScoreRecord.push({ "Name": userName, "Score": score });
